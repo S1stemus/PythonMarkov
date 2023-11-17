@@ -8,7 +8,7 @@ def start(rule_list, changed_string):
         stop_mark=False
         change_mark = False
         for i in range(0, len(rules)):
-            if rules[i][1].find('*'):
+            if rules[i][1].find('*')>-1:
                 rules[i][1]=rules[i][1].replace('*','')
                 stop_mark=True
             if changed_string.find(rules[i][0]) > -1:
@@ -24,14 +24,21 @@ def start(rule_list, changed_string):
                 break
         else:
             break
-
     return _out
 
 
 
-def check_rules(rule_list):
+def check_rules(rule_list,word):
     rules = rule_list.split(";")
     for r in rules:
         if len(r.split("-")) != 2:
-            return False
+            return False      
+    if word.find('*')>-1 and word.find('-')>-1 and word.find(';')>-1:
+        return False
     return True
+
+if __name__=='__main__':
+    word=input("Введите строку")
+    rule=input("Введите правило")
+    result=start(rule,word);
+    print (result);

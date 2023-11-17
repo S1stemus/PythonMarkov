@@ -37,8 +37,4 @@ def check_rules(rule_list,word):
         return False
     return True
 
-if __name__=='__main__':
-    word=input("Введите строку")
-    rule=input("Введите правило")
-    result=start(rule,word);
-    print (result);
+

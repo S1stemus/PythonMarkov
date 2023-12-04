@@ -30,6 +30,13 @@
      </widget>
     </item>
     <item>
+     <widget class="QPushButton" name="fileBtn">
+      <property name="text">
+       <string>Прочесть файл</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QPushButton" name="runBtn">
       <property name="text">
        <string>Выполнить</string>

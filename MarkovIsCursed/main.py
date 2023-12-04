@@ -1,3 +1,5 @@
+from PyQt5.QtWidgets import QFileDialog
+
 from MarkovLibrary import *
 from PyQt5 import QtWidgets
 from UiLayout import *
@@ -12,6 +14,7 @@ class App(QtWidgets.QMainWindow, Ui_MainWindow):
         self.clearBtn.clicked.connect(self.clearOutput)
         self.resetBtn.clicked.connect(self.clearAll)
         self.runBtn.clicked.connect(self.run)
+        self.fileBtn.clicked.connect(self.openFile)
 
     def clearOutput(self):
         self.outputBox.setPlainText("")
@@ -20,6 +23,20 @@ class App(QtWidgets.QMainWindow, Ui_MainWindow):
         self.inputBox.clear()
         self.outputBox.setPlainText("")
         self.cmdsBox.setPlainText("")
+
+    def openFile(self):
+        dialog = QFileDialog(self)
+        dialog.setFileMode(QFileDialog.AnyFile)
+        if dialog.exec_():
+            files = dialog.selectedFiles()
+            if len(files) == 1:
+                try:
+                    with open(files[0], encoding="utf-8") as f:
+                        self.inputBox.setText(f.read())
+                except:
+                    self.inputBox.setText("Не удалось прочесть файл")
+            else:
+                self.inputBox.setText("Выберите ровно 1 текстовый файл.")
 
     def run(self):
         text = self.inputBox.text()
